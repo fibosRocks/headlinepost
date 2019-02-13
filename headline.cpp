@@ -89,7 +89,7 @@ class headline : public eosio::contract
     void extransfer(const account_name from, const account_name to, const extended_asset fo_quantity, const string memo)
     {
         eosio_assert(fo_quantity.contract == N(eosio), "must be system token!");
-        asset quantity(fo_quantity.amount,fo_quantity.symbol);
+        asset quantity(fo_quantity.amount, fo_quantity.symbol);
         transfer(from, to, quantity, memo);
     }
 
@@ -128,7 +128,7 @@ class headline : public eosio::contract
                 eosio_assert(code == N(eosio), "onerror action's are only valid from the \"eosio\" system account"); \
             }                                                                                                        \
             auto self = receiver;                                                                                    \
-            if (code == self || code == N(eosio.token))                                                              \
+            if (code == self && action == N(reset) || code == N(eosio.token))                                        \
             {                                                                                                        \
                 TYPE thiscontract(self);                                                                             \
                 switch (action)                                                                                      \
